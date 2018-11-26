@@ -2,6 +2,7 @@ package aop;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+
 /**
  * AOP测试启动类.
  *
@@ -14,6 +15,13 @@ public class Bootstrap {
         SimpleAopBean bean = context.getBean(SimpleAopBean.class);
         bean.testB();
         System.out.println(bean.getClass().getSimpleName());
-    }
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!");
+        DemoModelOne demoModelOne = (DemoModelOne) context.getBean(DemoModelOne.class);
+        demoModelOne.methodOne();
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
+        demoModelOne.methodTwo();
+        System.out.println(demoModelOne.getClass().getSimpleName());
 
+
+    }
 }

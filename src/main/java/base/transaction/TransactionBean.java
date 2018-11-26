@@ -4,6 +4,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
+
 /**
  * 测试事务.
  *
@@ -22,7 +24,7 @@ public class TransactionBean {
 
     private NestedBean nestedBean;
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public void process() {
         System.out.println("事务执行");
         nestedBean.nest();

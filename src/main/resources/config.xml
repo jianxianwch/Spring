@@ -14,7 +14,27 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
 
+    <!--启动注解模式-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
     <bean id="simpleMethodInterceptor" class="aop.SimpleMethodInterceptor" />
+    <bean id="demoModelOne" class="aop.DemoModelOne"/>
+    <bean id="simpleHandler" class="aop.SimpleHandler" />
+    <bean id="simpleHandlerSecond" class="aop.SimpleHandlerSecond" />
+
+    <!--配置对象-->
+    <aop:config>
+        <!--配置切点-->
+        <aop:pointcut id="pointcut1" expression="execution(* aop.DemoModelOne.methodOne(..))" />
+        <!--配置切面-->
+        <aop:aspect ref="simpleHandler">
+            <aop:before method="before" pointcut-ref="pointcut1"></aop:before>
+            <aop:after method="after" pointcut-ref="pointcut1"></aop:after>
+            <aop:around method="around" pointcut-ref="pointcut1"></aop:around>
+        </aop:aspect>
+
+
+    </aop:config>
 
     <bean class="aop.SimpleAopBean" />
 
